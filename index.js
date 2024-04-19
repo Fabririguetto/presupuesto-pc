@@ -1,5 +1,5 @@
 function llenarTabla() {
-    fetch('https://fabririguetto.github.io/presupuesto-pc//Productos')
+    fetch('https://fabririguetto.github.io/presupuesto-pc/Productos')
         .then(res => res.json())
         .then(productos => {
             const tablaProductos = document.querySelector("#tabla-prod tbody");
