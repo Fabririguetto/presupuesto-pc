@@ -66,15 +66,17 @@ async function obtenerDatosProductos(productos) {
                     const datosArticulos = await page.evaluate(() => {
                         const articulos = document.querySelectorAll('.product-description');
                         const datos = [];
-                    
+                        
                         articulos.forEach(articulo => {
                             const nombreVendedor = articulo.querySelector('.subtitle').textContent.trim();
                             const nombreArticulo = articulo.querySelector('.product-title.line-clamp').textContent.trim();
                             const precioElemento = articulo.querySelector('h2[itemprop="price"]');
                             const precio = precioElemento ? precioElemento.textContent.trim() : 'Precio no disponible';
-                            datos.push({ nombreArticulo, nombreVendedor, precio });
+                            const imagenElemento = articulo.querySelector('img');
+                            const imagenProducto = imagenElemento ? imagenElemento.getAttribute('src') : 'URL no disponible';                    
+                            datos.push({ nombreArticulo, nombreVendedor, precio, imagenProducto });
                         });
-                    
+                        
                         return datos;
                     });
 

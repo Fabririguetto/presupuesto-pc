@@ -6,6 +6,11 @@ body {
     background-color: #000000; /* Fondo negro */
 }
 
+.visibles {
+    overflow-x: auto;
+    margin: 0 auto; /* Centrar la tabla horizontalmente */
+    position: fixed;
+}
 .titulo {
     text-align: center;
     color: #ffffff; /* Texto blanco */
@@ -21,9 +26,6 @@ body {
     margin-top: 20px; /* Espacio superior */
 }
 
-.checkbox {
-    color: aqua;
-}
 #filtro {
     padding: 10px;
     margin: 10px auto; /* Centrar horizontalmente */

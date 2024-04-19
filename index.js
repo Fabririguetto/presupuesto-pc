@@ -40,6 +40,7 @@ function llenarTabla() {
                                     <td>${producto.nombreVendedor}</td>
                                     <td>${producto.precio}</td>
                                     <td>${tipoProducto}</td>
+                                    <td>${productotipo.imagenProducto}</td>
                                 </tr>`;
                     tablaProductos.innerHTML += tr;
                 }
@@ -62,7 +63,8 @@ function actualizarTotal() {
     let total = 0;
 
     checkboxes.forEach(checkbox => {
-        const precio = parseFloat(checkbox.dataset.precio);
+        const precioString = checkbox.dataset.precio.replace('.', '').replace(',', '.'); // Corregir el formato del precio
+        const precio = parseFloat(precioString);
         if (!isNaN(precio)) {
             total += precio;
         }
@@ -70,7 +72,7 @@ function actualizarTotal() {
 
     totalElement.innerText = `Total: ${formatNumber(total)}`;
 
-    if (checkboxes.length > 6) {
+    if (checkboxes.length > 7) {
         this.checked = false;
         alert('Solo se pueden seleccionar un máximo de 6 checkboxes.');
     }
@@ -111,8 +113,14 @@ function buscarEnTabla() {
 }
 
 
-// Llamar a la función para llenar la tabla al cargar la página
-llenarTabla();
+fetch('http://localhost:3000/Productos')
+    .then(res => res.json())
+    .then(productos => {
+        llenarTabla(productos); // Llenar la tabla una vez que se obtengan los datos
+    })
+    .catch(error => {
+        console.error('Error al obtener los productos:', error);
+    });
 
 // Agregar un event listener al input de filtro para buscar en la tabla mientras se escribe
 document.getElementById('filtro').addEventListener('input', buscarEnTabla);

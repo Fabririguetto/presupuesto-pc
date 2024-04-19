@@ -7,23 +7,29 @@
     <link rel="stylesheet" type="text/css" href="autogestion.css">
 </head>
 <body>
-    <h2 class="titulo">Componentes</h2>
-    <div id="total"></div> 
-    <input type="text" id="filtro" placeholder="Buscar...">
-    <table id="tabla-prod" class="tabla-negra">
-        <thead>
-            <tr>
-                <th class="columna">Selección</th>
-                <th class="columna">ID</th>
-                <th class="columna">Articulo</th>
-                <th class="columna">Vendedor</th>
-                <th class="columna">Precio</th>
-                <th class="columna">Tipo</th>
-            </tr>
-        </thead>
-        <tbody class="cuerpo-tabla">
-        </tbody>
-    </table>
+    <div class = "visibles">
+        <h2 class="titulo">Componentes</h2>
+        <div id="total">Total: $ 0,00</div> 
+        <input type="text" id="filtro" placeholder="Buscar...">
+    </div>
+    
+    <div class="tabla-container">
+        <table id="tabla-prod" class="tabla-negra">
+            <thead>
+                <tr>
+                    <th class="columna">Selección</th>
+                    <th class="columna">ID</th>
+                    <th class="columna">Articulo</th>
+                    <th class="columna">Vendedor</th>
+                    <th class="columna">Precio</th>
+                    <th class="columna">Tipo</th>
+                </tr>
+            </thead>
+            <tbody class="cuerpo-tabla">
+            </tbody>
+        </table>
+    </div>
+    
     <script src="index.js"></script>
 </body>
 </html>
