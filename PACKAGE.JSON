@@ -1,0 +1,23 @@
+{
+  "name": "scrap-node",
+  "version": "1.0.0",
+  "desciption": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node scraping2.js"
+  },
+  "keywords": [],
+  "autor": "fabri",
+  "license": "ISC",
+  "author": "",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "playwright": "^1.43.0",
+    "puppeteer": "^22.6.3"
+  }
+}

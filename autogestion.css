@@ -1,0 +1,75 @@
+/* Estilos base para todos los dispositivos */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000; /* Fondo negro */
+}
+
+.titulo {
+    text-align: center;
+    color: #ffffff; /* Texto blanco */
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+/* Estilos para el div del total */
+#total {
+    text-align: center; /* Centrar el texto */
+    font-family: Arial, sans-serif;
+    color: #ffffff; /* Texto blanco */
+    margin-top: 20px; /* Espacio superior */
+}
+
+.checkbox {
+    color: aqua;
+}
+#filtro {
+    padding: 10px;
+    margin: 10px auto; /* Centrar horizontalmente */
+    margin-left: calc((100% - 90%) / 2); /* Calcular el margen izquierdo para centrar */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 90%;
+    box-sizing: border-box; /* Para incluir el padding en el ancho total del input */
+    font-size: 16px;
+}
+
+
+/* Estilo para resaltar el input cuando está enfocado */
+#filtro:focus {
+    outline: none;
+    border-color: #007bff; /* Color del borde cuando está enfocado */
+}
+
+#tablaContainer {
+    overflow-x: auto;
+    margin: 0 auto; /* Centrar la tabla horizontalmente */
+    max-width: 100%;
+}
+
+/* Estilo de tabla con fondo negro */
+.tabla-negra {
+    background-color: #000000; /* Fondo negro */
+    color: #ffffff; /* Texto blanco */
+    width: 80%; /* Ancho de la tabla */
+    margin: 0 auto; /* Centrar la tabla horizontalmente */
+}
+
+.tabla-negra th {
+    background-color: #333333; /* Gris oscuro para encabezados */
+}
+
+.tabla-negra td {
+    border: none;
+    padding: 12px;
+    text-align: left;
+}
+
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 767px) {
+    .tabla-negra th,
+    .tabla-negra td {
+        color: #ffffff; /* Texto blanco */
+    }
+}
