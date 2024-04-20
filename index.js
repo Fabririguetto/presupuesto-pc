@@ -1,5 +1,5 @@
 import port from './scraping2.js';
-import { iniciarScraping } from './scraping2.js';
+import { port, iniciarScraping } from './scraping.js';
 
 function llenarTabla() {
     fetch(`http://localhost:${port}/Productos`)

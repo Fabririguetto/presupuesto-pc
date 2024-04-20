@@ -95,18 +95,19 @@ async function obtenerDatosProductos(productos) {
     return datos;
 }
 
-async function iniciarScraping() {
-    try {
-        // Si los datos de productos aún no se han obtenido, se obtienen
-        if (!datosProductos) {
-            datosProductos = await obtenerDatosProductos(productos);
-            console.table(datosProductos);
+    async function iniciarScraping() {
+        try {
+            // Si los datos de productos aún no se han obtenido, se obtienen
+            if (!datosProductos) {
+                datosProductos = await obtenerDatosProductos(productos);
+                console.table(datosProductos);
+            }
+        } catch (error) {
+            console.error(error);
         }
-    } catch (error) {
-        console.error(error);
     }
-}
 
 app.listen(port, () => {
     console.log(`Servidor escuchando en http://localhost:${port}`);
 });
+export { port, iniciarScraping };
