@@ -1,7 +1,8 @@
-import { puerto } from './scraping2.js';
+import port from './scraping2.js';
+import { iniciarScraping } from './scraping2.js';
 
 function llenarTabla() {
-    fetch(`http://localhost:${puerto}/Productos`)
+    fetch(`http://localhost:${port}/Productos`)
         .then(res => res.json())
         .then(productos => {
             const tablaProductos = document.querySelector("#tabla-prod tbody");
@@ -115,7 +116,7 @@ function buscarEnTabla() {
 }
 
 
-fetch(`http://localhost:${puerto}/Productos`)
+fetch(`http://localhost:${port}/Productos`)
     .then(res => res.json())
     .then(productos => {
         llenarTabla(productos);

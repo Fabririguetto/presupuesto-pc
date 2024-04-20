@@ -6,7 +6,6 @@ import cors from "cors";
 const app = express();
 const port = process.env.PORT || 3000;
 
-module.exports = port;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -94,6 +93,18 @@ async function obtenerDatosProductos(productos) {
     }
 
     return datos;
+}
+
+async function iniciarScraping() {
+    try {
+        // Si los datos de productos aún no se han obtenido, se obtienen
+        if (!datosProductos) {
+            datosProductos = await obtenerDatosProductos(productos);
+            console.table(datosProductos);
+        }
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 app.listen(port, () => {
