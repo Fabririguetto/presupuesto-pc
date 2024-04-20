@@ -6,6 +6,8 @@ import cors from "cors";
 const app = express();
 const port = process.env.PORT || 3000;
 
+module.exports = port;
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());

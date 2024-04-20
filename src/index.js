@@ -1,5 +1,8 @@
+const puerto = require('./src/scraping2');
+
+
 function llenarTabla() {
-    fetch('https://fabririguetto.github.io/presupuesto-pc/Productos')
+    fetch(`http://localhost:${puerto}/Productos`)
         .then(res => res.json())
         .then(productos => {
             const tablaProductos = document.querySelector("#tabla-prod tbody");
@@ -113,10 +116,10 @@ function buscarEnTabla() {
 }
 
 
-fetch('http://localhost:3000/Productos')
+fetch(`http://localhost:${puerto}/Productos`)
     .then(res => res.json())
     .then(productos => {
-        llenarTabla(productos); // Llenar la tabla una vez que se obtengan los datos
+        llenarTabla(productos);
     })
     .catch(error => {
         console.error('Error al obtener los productos:', error);
