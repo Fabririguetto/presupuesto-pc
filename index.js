@@ -1,5 +1,4 @@
-const puerto = require('./scraping2');
-
+import {puerto} from 'scraping2.js';
 
 function llenarTabla() {
     fetch(`http://localhost:${puerto}/Productos`)
