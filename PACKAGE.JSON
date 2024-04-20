@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node scraping2.js",
-    "dev": "node index.js"
+    "dev": "node scraping2.js"
   },
   "keywords": [],
   "author": "fabri",
