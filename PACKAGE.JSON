@@ -1,18 +1,16 @@
 {
   "name": "scrap-node",
   "version": "1.0.0",
-  "desciption": "",
+  "description": "Descripción de tu proyecto aquí",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node scraping2.js",
-    "dev": "node scraping2.js"
+    "start": "node index.js",
+    "dev": "node index.js"    
   },
   "keywords": [],
-  "autor": "fabri",
+  "author": "fabri",
   "license": "ISC",
-  "author": "",
-  "description": "",
   "dependencies": {
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
