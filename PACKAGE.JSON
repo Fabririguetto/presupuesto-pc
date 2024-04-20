@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/scraping2.js",
-    "dev": "node src/scraping2.js"
+    "start": "node scraping2.js",
+    "dev": "node scraping2.js"
   },
   "keywords": [],
   "autor": "fabri",
