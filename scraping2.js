@@ -73,9 +73,9 @@ async function obtenerDatosProductos(productos) {
                             const nombreArticulo = articulo.querySelector('.product-title.line-clamp').textContent.trim();
                             const precioElemento = articulo.querySelector('h2[itemprop="price"]');
                             const precio = precioElemento ? precioElemento.textContent.trim() : 'Precio no disponible';
-                            const imagenElemento = articulo.querySelector('img');
-                            const imagenProducto = imagenElemento ? imagenElemento.getAttribute('src') : 'URL no disponible';                    
-                            datos.push({ nombreArticulo, nombreVendedor, precio, imagenProducto });
+                            const imagenElemento = articulo.querySelector('.product-image img');
+                            const urlProducto = articulo.querySelector('a[itemprop="url"]').getAttribute('href');                   
+                            datos.push({ nombreArticulo, nombreVendedor, precio, urlProducto });
                         });
                         
                         return datos;
@@ -94,6 +94,7 @@ async function obtenerDatosProductos(productos) {
 
     return datos;
 }
+
 
     async function iniciarScraping() {
         try {

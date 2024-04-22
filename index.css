@@ -10,12 +10,21 @@ body {
   overflow-x: auto;
   margin: 0 auto; /* Centrar la tabla horizontalmente */
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #000000; /* Fondo negro */
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 2; /* Asegurar que esté por encima de otros elementos */
+  text-align: center; /* Centrar contenido dentro del contenedor */
 }
+
 .titulo {
   text-align: center;
   color: #ffffff; /* Texto blanco */
-  margin-top: 30px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 /* Estilos para el div del total */
@@ -25,18 +34,30 @@ body {
   color: #ffffff; /* Texto blanco */
   margin-top: 20px; /* Espacio superior */
 }
+#deseleccionar, #proveedores  {
+  background-color: #007bff; /* Color de fondo azul */
+  color: #ffffff; /* Texto blanco */
+  border: none; /* Sin borde */
+  padding: 10px 20px; /* Rellenar el botón */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+  font-size: 16px; /* Tamaño de fuente */
+  display: inline-block; /* Mostrar elementos en línea */
+  margin-right: 10px; /* Espacio entre los elementos */
+  margin-top: 10px;
+}
 
 #filtro {
   padding: 10px;
   margin: 10px auto; /* Centrar horizontalmente */
-  margin-left: calc((100% - 90%) / 2); /* Calcular el margen izquierdo para centrar */
-  border: 1px solid #ccc;
+  border: 1px solid #ffffff; /* Borde blanco */
   border-radius: 5px;
   width: 90%;
   box-sizing: border-box; /* Para incluir el padding en el ancho total del input */
   font-size: 16px;
+  background-color: transparent; /* Fondo transparente */
+  color: #ffffff; /* Texto blanco */
 }
-
 
 /* Estilo para resaltar el input cuando está enfocado */
 #filtro:focus {
@@ -44,10 +65,9 @@ body {
   border-color: #007bff; /* Color del borde cuando está enfocado */
 }
 
-#tablaContainer {
-  overflow-x: auto;
-  margin: 0 auto; /* Centrar la tabla horizontalmente */
-  max-width: 100%;
+.tabla-container {
+  overflow-y: auto; /* Agregar desplazamiento vertical cuando sea necesario */
+  max-height: 500px; /* Ajusta la altura máxima de la tabla según sea necesario */
 }
 
 /* Estilo de tabla con fondo negro */
@@ -56,16 +76,26 @@ body {
   color: #ffffff; /* Texto blanco */
   width: 80%; /* Ancho de la tabla */
   margin: 0 auto; /* Centrar la tabla horizontalmente */
+  border-collapse: collapse; /* Colapsar los bordes de la tabla */
+  z-index: 1; /* Asegurar que esté detrás de los elementos visibles */
+  text-align: center;
+}
+
+.tabla-negra thead {
+  position: sticky; /* Fijar la posición */
+  top: 0; /* Mantener en la parte superior */
+  z-index: 2; /* Asegurar que esté por encima del contenido de la tabla */
+  background-color: #333333; /* Color de fondo del encabezado */
 }
 
 .tabla-negra th {
+  padding: 12px;
   background-color: #333333; /* Gris oscuro para encabezados */
 }
 
 .tabla-negra td {
   border: none;
   padding: 12px;
-  text-align: left;
 }
 
 /* Estilos para dispositivos móviles */

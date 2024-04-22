@@ -7,14 +7,18 @@
     <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
-    <div class = "visibles">
+    <div class="visibles">
         <h2 class="titulo">Componentes</h2>
         <div id="total">Total: $ 0,00</div> 
+        <div class="Selects">
+            <button class="Button" id="deseleccionar">deseleccionar todos</button>
+            <select id="proveedores">
+                <option value="">Seleccionar proveedor</option>
+            </select>
+        </div>
         <input type="text" id="filtro" placeholder="Buscar...">
-    </div>
-    
-    <div class="tabla-container">
-        <table id="tabla-prod" class="tabla-negra">
+        <div class="tabla-container">
+            <table id="tabla-prod" class="tabla-negra">
             <thead>
                 <tr>
                     <th class="columna">Selección</th>
@@ -28,9 +32,8 @@
             </thead>
             <tbody class="cuerpo-tabla">
             </tbody>
-        </table>
     </div>
-    
+
     <script src="index.js"></script>
 </body>
 </html>

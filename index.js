@@ -1,6 +1,4 @@
-import port from './scraping2.js';
-import { port, iniciarScraping } from './scraping.js';
-
+let port = 3000;
 function llenarTabla() {
     fetch(`http://localhost:${port}/Productos`)
         .then(res => res.json())
@@ -43,7 +41,7 @@ function llenarTabla() {
                                     <td>${producto.nombreVendedor}</td>
                                     <td>${producto.precio}</td>
                                     <td>${tipoProducto}</td>
-                                    <td>${productotipo.imagenProducto}</td>
+                                    <td><img>${producto.urlProducto}</img></td>
                                 </tr>`;
                     tablaProductos.innerHTML += tr;
                 }
@@ -52,6 +50,42 @@ function llenarTabla() {
             const checkboxes = document.querySelectorAll('.checkbox');
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', actualizarTotal);
+            });
+        })
+        .catch(error => {
+            console.error('Error al obtener los productos:', error);
+        });
+}
+
+function cargarProveedores() {
+    fetch(`http://localhost:${port}/Productos`)
+        .then(res => res.json())
+        .then(productos => {
+            const selectProveedores = document.getElementById('proveedores');
+            
+            // Limpiar opciones existentes en el select
+            selectProveedores.innerHTML = '';
+
+            // Agregar la opción por defecto
+            const defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.textContent = 'Seleccionar proveedor';
+            selectProveedores.appendChild(defaultOption);
+
+            // Utilizar un conjunto para almacenar los nombres de los proveedores
+            const nombresProveedores = new Set();
+
+            // Agregar cada proveedor como una opción en el select, evitando repeticiones
+            productos.forEach(producto => {
+                // Verificar si el nombre del proveedor ya ha sido agregado
+                if (!nombresProveedores.has(producto.nombreVendedor)) {
+                    nombresProveedores.add(producto.nombreVendedor);
+
+                    const option = document.createElement('option');
+                    option.value = ''; // No estoy seguro qué valor asignar aquí, depende de cómo vayas a utilizar el ID del proveedor
+                    option.textContent = producto.nombreVendedor; // Asigna el nombre del proveedor como texto de la opción
+                    selectProveedores.appendChild(option);
+                }
             });
         })
         .catch(error => {
@@ -86,28 +120,25 @@ function formatNumber(number) {
     return new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' }).format(number);
 }
 
-// Función para buscar en la tabla
-function buscarEnTabla() {
-    let filtro = document.getElementById('filtro').value.toUpperCase();
-    let tabla = document.getElementById('tabla-prod');
-    let filasCuerpo = tabla.querySelectorAll('tbody tr'); // Filas de la tabla con los datos
+
+function filtrarPorArticulo() {
+    const filtro = document.getElementById('filtro').value.trim().toUpperCase();
+    const filtroProveedor = document.getElementById('proveedores').value.trim().toUpperCase();
+    const tabla = document.getElementById('tabla-prod');
+    const filasCuerpo = tabla.querySelectorAll('tbody tr'); // Filas de la tabla con los datos
 
     // Iterar sobre todas las filas de datos de la tabla
     filasCuerpo.forEach(fila => {
-        let celdas = fila.getElementsByTagName('td');
-        let encontrado = false;
+        let celdas = fila.querySelectorAll('td:nth-child(3), td:nth-child(4), td:nth-child(6)'); // Obtener celdas de campos específicos
+        let textoFila = '';
 
-        // Iterar sobre todas las celdas de la fila
-        for (let j = 0; j < celdas.length; j++) {
-            let textoCelda = celdas[j].innerText.toUpperCase();
-            if (textoCelda.indexOf(filtro) > -1) {
-                encontrado = true;
-                break;
-            }
-        }
+        // Concatenar el texto de las celdas de los campos específicos
+        celdas.forEach(celda => {
+            textoFila += celda.innerText.trim().toUpperCase() + ' ';
+        });
 
-        // Mostrar u ocultar la fila de datos según el resultado de la búsqueda
-        if (encontrado) {
+        // Ocultar la fila si no coincide con el filtro de texto o el filtro de proveedor
+        if (textoFila.includes(filtro) && (filtroProveedor === '' || textoFila.includes(filtroProveedor))) {
             fila.style.display = '';
         } else {
             fila.style.display = 'none';
@@ -115,6 +146,36 @@ function buscarEnTabla() {
     });
 }
 
+
+function filtrarPorProveedor() {
+    const filtro = document.getElementById('proveedores').value.trim();
+    const tabla = document.getElementById('tabla-prod');
+    const filasCuerpo = tabla.querySelectorAll('tbody tr'); 
+
+    // Iterar sobre todas las filas de datos de la tabla
+    filasCuerpo.forEach(fila => {
+        let celdas = fila.querySelectorAll('td:nth-child(4)'); // Obtener celdas de campos específicos
+        let textoFila = '';
+
+        // Concatenar el texto de las celdas de los campos específicos
+        celdas.forEach(celda => {
+            textoFila += celda.innerText.trim().toUpperCase() + ' ';
+        });
+
+        // Ocultar la fila si no coincide con el filtro de texto o el filtro de proveedor
+        if (textoFila.includes(filtro) && (filtroProveedor === '' || textoFila.includes(filtroProveedor))) {
+            fila.style.display = '';
+        } else {
+            fila.style.display = 'none';
+        }
+    });
+}
+
+// Llamar a la función para cargar los proveedores al cargar la página
+cargarProveedores();
+
+document.getElementById('filtro').addEventListener('input', filtrarPorArticulo);
+document.getElementById('proveedores').addEventListener('change', filtrarPorProveedor);
 
 fetch(`http://localhost:${port}/Productos`)
     .then(res => res.json())
@@ -125,5 +186,11 @@ fetch(`http://localhost:${port}/Productos`)
         console.error('Error al obtener los productos:', error);
     });
 
-// Agregar un event listener al input de filtro para buscar en la tabla mientras se escribe
-document.getElementById('filtro').addEventListener('input', buscarEnTabla);
+
+document.getElementById('deseleccionar').addEventListener('click', () => {
+    const checkboxes = document.querySelectorAll('.checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+    document.getElementById('total').innerText = "Total: $0,00";
+});
