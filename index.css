@@ -67,7 +67,7 @@ body {
 
 .tabla-container {
   overflow-y: auto; /* Agregar desplazamiento vertical cuando sea necesario */
-  max-height: 500px; /* Ajusta la altura máxima de la tabla según sea necesario */
+  height: 600px; /* Ajusta la altura máxima de la tabla según sea necesario */
 }
 
 /* Estilo de tabla con fondo negro */
@@ -94,7 +94,7 @@ body {
 }
 
 .tabla-negra td {
-  border: none;
+  border-bottom: 1px solid #ffffff;
   padding: 12px;
 }
 

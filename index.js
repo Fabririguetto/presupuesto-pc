@@ -41,7 +41,7 @@ function llenarTabla() {
                                     <td>${producto.nombreVendedor}</td>
                                     <td>${producto.precio}</td>
                                     <td>${tipoProducto}</td>
-                                    <td><img>${producto.urlProducto}</img></td>
+                                    <td><a href="${producto.urlProducto}" target="_blank">Ver producto</a></td>
                                 </tr>`;
                     tablaProductos.innerHTML += tr;
                 }
