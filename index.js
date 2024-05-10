@@ -93,6 +93,37 @@ function cargarProveedores() {
         });
 }
 
+function cargartipos() {
+    // Obtener el elemento select
+    const selectTipos = document.getElementById('tipos');
+
+    // Crear las opciones para los tipos
+    const opcionesTipos = [
+        { value: 'Procesador', text: 'Procesador' },
+        { value: 'Placa base', text: 'Placa base' },
+        { value: 'RAM', text: 'RAM' },
+        { value: 'Disco', text: 'Disco' },
+        { value: 'Fuente', text: 'Fuente' },
+        { value: 'Gabinete', text: 'Gabinete' }
+        ];
+
+    // Limpiar el elemento select
+    selectTipos.innerHTML = '';
+
+    const defaultOption = document.createElement('option');
+    defaultOption.value = '';
+    defaultOption.textContent = 'Seleccionar tipo de producto';
+    selectTipos.appendChild(defaultOption)
+
+    // Iterar sobre las opciones de tipos y agregarlas al elemento select
+    opcionesTipos.forEach(opcion => {
+        const optionElement = document.createElement('option');
+        optionElement.value = opcion.value;
+        optionElement.textContent = opcion.text;
+        selectTipos.appendChild(optionElement);
+    });
+}
+
 // Función para actualizar el total cuando cambian los checkboxes
 function actualizarTotal() {
     const totalElement = document.getElementById('total');
@@ -121,9 +152,12 @@ function formatNumber(number) {
 }
 
 
-function filtrarPorArticulo() {
-    const filtro = document.getElementById('filtro').value.trim().toUpperCase();
-    const filtroProveedor = document.getElementById('proveedores').value.trim().toUpperCase();
+function filtro() {
+    const filtroArticulo = document.getElementById('filtro').value.trim().toUpperCase();
+    const selectProveedor = document.getElementById('proveedores');
+    const filtroProveedor = selectProveedor.options[selectProveedor.selectedIndex].innerText.trim().toUpperCase();
+    const selecttipos = document.getElementById('tipos');
+    const filtroTipos = selecttipos.options[selecttipos.selectedIndex].innerText.trim().toUpperCase();
     const tabla = document.getElementById('tabla-prod');
     const filasCuerpo = tabla.querySelectorAll('tbody tr'); // Filas de la tabla con los datos
 
@@ -137,8 +171,8 @@ function filtrarPorArticulo() {
             textoFila += celda.innerText.trim().toUpperCase() + ' ';
         });
 
-        // Ocultar la fila si no coincide con el filtro de texto o el filtro de proveedor
-        if (textoFila.includes(filtro) && (filtroProveedor === '' || textoFila.includes(filtroProveedor))) {
+        // Mostrar la fila si coincide con el filtro de artículo y el filtro de proveedor
+        if ((filtroArticulo === '' || textoFila.includes(filtroArticulo)) && (filtroProveedor === 'SELECCIONAR PROVEEDOR' || textoFila.includes(filtroProveedor)) && (filtroTipos === 'SELECCIONAR TIPO DE PRODUCTO' || textoFila.includes(filtroTipos)) ) {
             fila.style.display = '';
         } else {
             fila.style.display = 'none';
@@ -147,35 +181,15 @@ function filtrarPorArticulo() {
 }
 
 
-function filtrarPorProveedor() {
-    const filtro = document.getElementById('proveedores').value.trim();
-    const tabla = document.getElementById('tabla-prod');
-    const filasCuerpo = tabla.querySelectorAll('tbody tr'); 
 
-    // Iterar sobre todas las filas de datos de la tabla
-    filasCuerpo.forEach(fila => {
-        let celdas = fila.querySelectorAll('td:nth-child(4)'); // Obtener celdas de campos específicos
-        let textoFila = '';
-
-        // Concatenar el texto de las celdas de los campos específicos
-        celdas.forEach(celda => {
-            textoFila += celda.innerText.trim().toUpperCase() + ' ';
-        });
-
-        // Ocultar la fila si no coincide con el filtro de texto o el filtro de proveedor
-        if (textoFila.includes(filtro) && (filtroProveedor === '' || textoFila.includes(filtroProveedor))) {
-            fila.style.display = '';
-        } else {
-            fila.style.display = 'none';
-        }
-    });
-}
 
 // Llamar a la función para cargar los proveedores al cargar la página
 cargarProveedores();
+cargartipos();
 
-document.getElementById('filtro').addEventListener('input', filtrarPorArticulo);
-document.getElementById('proveedores').addEventListener('change', filtrarPorProveedor);
+document.getElementById('filtro').addEventListener('input', filtro);
+document.getElementById('proveedores').addEventListener('change', filtro);
+document.getElementById('tipos').addEventListener('change', filtro);
 
 fetch(`http://localhost:${port}/Productos`)
     .then(res => res.json())

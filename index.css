@@ -34,7 +34,7 @@ body {
   color: #ffffff; /* Texto blanco */
   margin-top: 20px; /* Espacio superior */
 }
-#deseleccionar, #proveedores  {
+#deseleccionar, #proveedores, #tipos {
   background-color: #007bff; /* Color de fondo azul */
   color: #ffffff; /* Texto blanco */
   border: none; /* Sin borde */
